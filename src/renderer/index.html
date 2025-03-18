@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Configuração de Roteador</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Configuração de Roteador</h2>
+      <form id="config-form">
+        <label for="loja">Número da Loja:</label>
+        <input type="number" id="inLoja" name="loja" min="1" required />
+
+        <label for="modelo">Modelo do Roteador:</label>
+        <select id="inModelo" name="modelo" required>
+          <option value="" disabled selected>Selecione um modelo</option>
+          <option value="Vivo Box">Vivo Box</option>
+          <option value="Tim Box">Tim Box</option>
+          <option value="Claro Box">Claro Box</option>
+        </select>
+
+        <button type="submit">Confirmar</button>
+      </form>
+
+      <p id="mensagem"></p>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>
