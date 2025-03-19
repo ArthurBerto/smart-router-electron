@@ -2,10 +2,12 @@ const path = require("node:path"); // Corrigindo a importação do módulo `path
 const { scripTim } = require("./src/configRouters/configTim.js"); // Importando as funções Playwright
 const { app, BrowserWindow, nativeTheme, ipcMain } = require("electron");
 
+let win;
+
 // Janela principal
 const createWindow = () => {
   nativeTheme.themeSource = "system"; // Abre a cor da janela de acordo com o configurado pelo sistema
-  const win = new BrowserWindow({
+  win = new BrowserWindow({
     width: 800,
     height: 600,
     icon: "./src/public/img/icone.png",
@@ -28,7 +30,6 @@ app.whenReady().then(() => {
 
   // Manipula a configuração do roteador via IPC
   ipcMain.on("configurar-roteador", async (e, { modelo, loja }) => {
-    console.log(`Configuração solicitada: ${modelo} para LJ${loja}`);
 
     try {
       if (modelo === "Vivo Box") {
@@ -44,6 +45,13 @@ app.whenReady().then(() => {
       console.error("Erro ao configurar o roteador:", err);
     }
   });
+
+  ipcMain.on("abrir-configuracao", async () => {
+    if (win) {
+      win.loadFile("./src/views/configuracao.html")
+    }
+  })
+
 });
 
 // Quando ele identifica que a janela foi fechada, ele encerra a aplicação

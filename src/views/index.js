@@ -10,4 +10,5 @@ frm.addEventListener("submit", (e) => {
 
   // Manda via API qual o modelo de roteador deve ser executado
   api.configurarRoteador(modelo, loja);
+  api.mudarParaConfiguracao();
 });
