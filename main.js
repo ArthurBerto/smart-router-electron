@@ -31,6 +31,10 @@ app.whenReady().then(() => {
   // Manipula a configuração do roteador via IPC
   ipcMain.on("configurar-roteador", async (e, { modelo, loja }) => {
 
+    if (win) {
+      win.loadFile("./src/views/configuracao.html")
+    }
+
     try {
       if (modelo === "Vivo Box") {
         await ConfigVivo(loja);
@@ -45,12 +49,6 @@ app.whenReady().then(() => {
       console.error("Erro ao configurar o roteador:", err);
     }
   });
-
-  ipcMain.on("abrir-configuracao", async () => {
-    if (win) {
-      win.loadFile("./src/views/configuracao.html")
-    }
-  })
 
 });
 
