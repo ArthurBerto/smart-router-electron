@@ -8,8 +8,6 @@ frm.addEventListener("submit", (e) => {
 
   mensagem.innerText = `Configuração iniciada para a LJ${loja} com o modelo ${modelo}.`;
 
-  //window.electronAPI.configurarRoteador(modelo, loja);
-  console.log("Antes de ver a versão do Electron")
-  console.log(`Electron: ${api.verElectron()}`)
-  console.log("Enviado")
+  // Manda via API qual o modelo de roteador deve ser executado
+  api.configurarRoteador(modelo, loja);
 });
