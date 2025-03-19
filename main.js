@@ -1,20 +1,16 @@
-import { app, BrowserWindow, nativeTheme, ipcMain } from "electron";
-import { dirname, join } from "path";
-import { fileURLToPath } from "url";
-import { scripTim } from "./src/configRouters/configTim.js"; // Importando as funções Playwright
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const path = require("node:path"); // Corrigindo a importação do módulo `path`
+const { scripTim } = require("./src/configRouters/configTim.js"); // Importando as funções Playwright
+const { app, BrowserWindow, nativeTheme } = require('electron')
 
 // Janela principal
-function createWindow() {
+const createWindow = () => {
   nativeTheme.themeSource = "system"; // Abre a cor da janela de acordo com o configurado pelo sistema
   const win = new BrowserWindow({
     width: 800,
     height: 600,
-    icon: join(__dirname, "/src/public/img/icone.png"),
+    icon: './src/public/img/icone.png',
     webPreferences: {
-      preload: "preload.js",
+      preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
       nodeIntegration: false,
       enableRemoteModule: false,
@@ -24,7 +20,7 @@ function createWindow() {
     //autoHideMenuBar: true, // Esconde o menu
   });
 
-  win.loadURL(`file://${__dirname}/src/views/index.html`);
+  win.loadFile('./src/views/index.html')
 }
 
 app.whenReady().then(() => {
@@ -36,7 +32,7 @@ app.on("window-all-closed", () => {
   if (process.platform !== "darwin") app.quit();
 });
 
-// Manipula a configuração do roteador via IPC
+/* Manipula a configuração do roteador via IPC
 ipcMain.on("configurar-roteador", async (e, { modelo, loja }) => {
   console.log(`Configuração solicitada: ${modelo} para Loja ${loja}`);
 
@@ -53,4 +49,4 @@ ipcMain.on("configurar-roteador", async (e, { modelo, loja }) => {
   } catch (err) {
     console.error("Erro ao configurar o roteador:", err);
   }
-});
+});*/
