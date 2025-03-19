@@ -28,6 +28,12 @@ const createWindow = () => {
 app.whenReady().then(() => {
   createWindow();
 
+  ipcMain.on("enviar-log", async (_event, mensagem) => {
+    if(win) {
+      await win.webContents.send("mostrar-log", mensagem)
+    }
+  })
+
   // Manipula a configuração do roteador via IPC
   ipcMain.on("configurar-roteador", async (e, { modelo, loja }) => {
 
