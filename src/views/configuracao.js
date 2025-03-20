@@ -13,7 +13,13 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // Escuta mensagens do Main Process
-  window.api.receberLogs( async (mensagem) => {
-    await escreverLogs(mensagem);
+  window.api.receberLogs( (mensagem) => {
+    escreverLogs(mensagem);
+    if (mensagem === "FIM DA CONFIGURAÇÃO!") {
+      const voltar = document.querySelector("#btnVoltar")
+      console.log("teste")
+      voltar.classList.remove("hidden")
+      console.log("botão adicionado")
+    }
   });
 });

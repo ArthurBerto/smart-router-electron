@@ -1,23 +1,71 @@
 const { ipcMain } = require("electron");
 const { chromium } = require("playwright");
 
+const { fazerLogin } = require("./Services/loginService.js");
+const { alterarSSID } = require("./Services/ssidService.js");
+const { alterarConfigAPN } = require("./Services/configApnService.js");
+const { ativarDMZ } = require("./Services/ativarDmzService.js");
+const { configDDNS } = require("./Services/DdnsService.js");
+const { alterarDHCP } = require("./Services/dhcpService.js");
+const { estatistica } = require("./Services/estatisticaService.js");
+const { antena } = require("./Services/alterarAntenaService.js")
+const { alterarSenha } = require("./Services/alterarSenhaService.js")
+const { desabilitarHorarioVerao } = require("./Services/horarioVeraoService.js")
+const { agendamentoDiario } = require("./Services/reinicioDiarioService.js")
+
 const scripTim = async (loja) => {
-  // Inicia um navegador Chromium
-  await ipcMain.emit("enviar-log", null, "Testeaaaaaaaaa");
-  const browser = await chromium.launch({ headless: false }); // Altere para 'true' para rodar em segundo plano
-  const page = await browser.newPage();
-  await ipcMain.emit("enviar-log", null, "Navegador aberto");
-  // Navega até o Google
-  await ipcMain.emit("enviar-log", null, "Acessando o google.com");
-  await page.goto("https://www.google.com");
+  // Inicializando as variáveis
+  const roteadorIP = "http://192.168.1.1/normal";
+  const usuario = "livetim";
+  const senha = "L1vt1m";
+  const novaSenha = "@LiveTim#2023";
+  const novoIP = "http://10.200.0.1/normal";
 
-  // Aguarda 3 segundos para visualização
-  await ipcMain.emit("enviar-log", null, "Esperando 3 seg");
-  await page.waitForTimeout(3000);
+  // Abrindo o navegador chrome com o uso da biblioteca playwright
+  const navegador = await chromium.launch({
+    headless: false,
+    slowMo: 500,
+  });
 
-  // Fecha o navegador
-  await browser.close();
-  await ipcMain.emit("enviar-log", null, "Navegador fechado.");
+  // Abrindo uma nova página no navegador
+  const page = await navegador.newPage();
+
+  try {
+    await page.goto(roteadorIP, {
+      waitUntil: "domcontentloaded",
+      timeout: 10000,
+    });
+    ipcMain.emit("enviar-log", null, "Interface gráfica carregada!");
+  } catch (err) {
+    ipcMain.emit(
+      "enviar-log",
+      null,
+      `ERRO: Não foi possível carregar '${roteadorIP}', verifique se a Tim Box está com as configurações de fábrica ou com o cabo de rede conectado.`
+    );
+    await navegador.close();
+  }
+
+  await fazerLogin(page, usuario, senha); // Função que realiza o login
+  await alterarSSID(page, loja); // Função que altera o SSID e senha de acesso
+  await alterarConfigAPN(page); // Função que altera as configs de APN
+  await ativarDMZ(page); // Função que ativa as configurações de DMZ
+  await configDDNS(page, loja); // Função que altera as configurações de DDNS
+  await alterarDHCP(page); // Função que altera as configurações de DHCP
+
+  await page.goto(novoIP, { waitUntil: "domcontentloaded" }); // Entra no novo IP configurado no DHCP
+  await fazerLogin(page, usuario, senha); // Realiza um novo login
+  await estatistica(page); // Função que altera os planos de dados
+  await antena(page); // Função que altera para antena externa
+  await alterarSenha(page, senha, novaSenha); // Função para alterar a senha
+
+  await page.goto(novoIP, { waitUntil: "domcontentloaded" }); // Entra no novo IP configurado no DHCP
+  await fazerLogin(page, usuario, novaSenha); // Realiza um novo login
+  await desabilitarHorarioVerao(page); // Desabilita a opção de horário de verão
+  await agendamentoDiario(page); // Aplica as configurações para reiniciar conexões
+
+  await navegador.close();
+  ipcMain.emit("enviar-log", null, "FIM DA CONFIGURAÇÃO!");
+  return
 };
 
 module.exports = { scripTim };

@@ -28,9 +28,9 @@ const createWindow = () => {
 app.whenReady().then(() => {
   createWindow();
 
-  ipcMain.on("enviar-log", async (_event, mensagem) => {
+  ipcMain.on("enviar-log", (event, mensagem) => {
     if(win) {
-      await win.webContents.send("mostrar-log", mensagem)
+      win.webContents.send("mostrar-log", mensagem)
     }
   })
 
@@ -55,6 +55,12 @@ app.whenReady().then(() => {
       console.error("Erro ao configurar o roteador:", err);
     }
   });
+
+  ipcMain.on("voltarMenu", () => {
+    if (win) {
+      win.loadFile("./src/views/index.html")
+    }
+  })
 
 });
 
