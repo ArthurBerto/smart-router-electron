@@ -1,4 +1,5 @@
 const { ipcMain } = require("electron");
+const { escreverTxt } = require("../../utils/escreverTxt");
 
 /**
  * Tem a função de alterar as configuraçõs de reinicio diário do navegador
@@ -22,6 +23,7 @@ const reiniciarConexao = async (page) => {
     null,
     "Aplicado configurações para Reiniciar conexões"
   );
+  escreverTxt("Aplicado configurações para Reiniciar conexões");
   return;
 };
 

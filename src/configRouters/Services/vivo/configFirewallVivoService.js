@@ -1,4 +1,5 @@
 const { ipcMain } = require("electron");
+const { escreverTxt } = require("../../utils/escreverTxt");
 
 /**
  * Tem a função de ativar as configurações de gerenciamento remoto
@@ -16,6 +17,7 @@ const configFirewall = async (page) => {
   // Espera 1 seg
   await page.waitForTimeout(1000);
   ipcMain.emit("enviar-log", null, "Ativado gerenciamento remoto da Web");
+  escreverTxt("Ativado gerenciamento remoto da Web");
   return;
 };
 

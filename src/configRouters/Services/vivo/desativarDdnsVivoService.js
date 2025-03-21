@@ -1,4 +1,5 @@
 const { ipcMain } = require("electron");
+const { escreverTxt } = require("../../utils/escreverTxt");
 
 /**
  * Tem a função de desativar as configurações de DDNS do roteador
@@ -16,6 +17,7 @@ const desativarDDNS = async (page) => {
   await page.click('td[id="apply_btn"]');
   await page.waitForTimeout(2000);
   ipcMain.emit("enviar-log", null, `Desativado o DDNS`);
+  escreverTxt("Desativado o DDNS");
   return;
 };
 

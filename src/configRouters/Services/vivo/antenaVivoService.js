@@ -1,4 +1,5 @@
 const { ipcMain } = require("electron");
+const { escreverTxt } = require("../../utils/escreverTxt");
 
 /**
  * Tem a função de alterar para antena externa do roteador
@@ -16,6 +17,7 @@ const antena = async (page) => {
 
   await page.click('td[id="apply_btn"]');
   ipcMain.emit("enviar-log", null, "Ajustado para antena externa");
+  escreverTxt("Ajustado para antena externa");
   return;
 };
 

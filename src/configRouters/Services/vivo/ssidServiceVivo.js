@@ -1,4 +1,5 @@
 const { ipcMain } = require("electron");
+const { escreverTxt } = require("../../utils/escreverTxt");
 
 /**
  * Tem a função de alterar o SSID do roteador e sua senha de acesso a rede WI-FI
@@ -20,6 +21,7 @@ const alterarSSID = async (page, loja) => {
   await page.keyboard.press("Enter");
   await page.waitForTimeout(20000);
   ipcMain.emit("enviar-log", null, "SSID e Senha de acesso alterada!");
+  escreverTxt("SSID e Senha de acesso alterada!");
   return;
 };
 

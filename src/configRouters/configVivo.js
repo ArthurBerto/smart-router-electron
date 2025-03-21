@@ -14,6 +14,7 @@ const { desativarDDNS } = require("./Services/vivo/desativarDdnsVivoService.js")
 const { reiniciarConexao } = require("./Services/vivo/reinicioDiarioVivoService.js");
 const { antena } = require("./Services/vivo/antenaVivoService.js");
 const { planoDados } = require("./Services/vivo/planoDadosVivoService.js");
+const { escreverTxt } = require("./utils/escreverTxt.js");
 
 const scriptVivo = async (loja) => {
   // Inicializando as variáveis
@@ -34,12 +35,14 @@ const scriptVivo = async (loja) => {
 
   try {
     ipcMain.emit("enviar-log", null, "Acessando o roteador");
+    escreverTxt("Acessando o roteador")
     try {
       await page.goto(roteadorIP, {
         waitUntil: "domcontentloaded",
         timeout: 10000,
       });
       ipcMain.emit("enviar-log", null, "Interface web carregada!");
+      escreverTxt("Interface web carregada!")
     } catch (err) {
       ipcMain.emit(
         "enviar-log",
@@ -72,6 +75,7 @@ const scriptVivo = async (loja) => {
   } finally {
     await navegador.close();
     ipcMain.emit("enviar-log", null, "FIM DA CONFIGURAÇÃO!");
+    escreverTxt("FIM DA CONFIGURAÇÃO!")
     return;
   }
 };

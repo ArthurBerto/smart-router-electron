@@ -1,4 +1,5 @@
 const { ipcMain } = require("electron");
+const { escreverTxt } = require("../../utils/escreverTxt");
 
 /**
  * Tem a função de alterar as configurações de DDNS do roteador
@@ -23,6 +24,9 @@ const configDDNS = async (page, loja) => {
   ipcMain.emit(
     "enviar-log",
     null,
+    `Configurações de DDNS ajustadas para lj${loja}-4g.fortiddns.com!`
+  );
+  escreverTxt(
     `Configurações de DDNS ajustadas para lj${loja}-4g.fortiddns.com!`
   );
   // Espera 10 seg

@@ -1,4 +1,5 @@
 const { ipcMain } = require("electron");
+const { escreverTxt } = require("../../utils/escreverTxt");
 
 /**
  * Tem a função de alterar a senha do roteador
@@ -18,6 +19,7 @@ const alterarSenha = async (page, senhaAntiga, senhaNova) => {
   await iframe.locator('input[name="Confirm_New_Passwd"]').fill(senhaNova);
   await page.click('td[id="apply_btn"]');
   ipcMain.emit("enviar-log", null, "Senha alterada conforme o 'Key Pass'.");
+  escreverTxt("Senha alterada conforme o 'Key Pass'.");
   return;
 };
 

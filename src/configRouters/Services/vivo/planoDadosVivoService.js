@@ -1,4 +1,5 @@
 const { ipcMain } = require("electron");
+const { escreverTxt } = require("../../utils/escreverTxt");
 
 /**
  * Tem a função de alterar o plano de dados do roteador
@@ -20,6 +21,7 @@ const planoDados = async (page) => {
   await page.click('td[id="apply_btn"]');
 
   ipcMain.emit("enviar-log", null, "Configurado plano de dados para 100GB");
+  escreverTxt("Configurado plano de dados para 100GB");
   return;
 };
 

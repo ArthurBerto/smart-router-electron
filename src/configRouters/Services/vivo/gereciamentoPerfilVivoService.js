@@ -1,4 +1,5 @@
 const { ipcMain } = require("electron");
+const { escreverTxt } = require("../../utils/escreverTxt");
 
 /**
  * Tem a função de alterar as configurações de APN do roteador
@@ -38,6 +39,7 @@ const gerenciamentoPerfil = async (page) => {
   await page.click('td[id="del_btn"]');
   await page.waitForTimeout(20000);
   ipcMain.emit("enviar-log", null, "Parâmetros de APN alterados");
+  escreverTxt("Parâmetros de APN alterados");
   return;
 };
 

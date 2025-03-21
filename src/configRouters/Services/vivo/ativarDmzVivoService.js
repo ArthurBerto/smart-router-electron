@@ -1,4 +1,5 @@
 const { ipcMain } = require("electron");
+const { escreverTxt } = require("../../utils/escreverTxt");
 
 /**
  * Tem a função de ativar as configurações de DMZ do roteador
@@ -16,6 +17,7 @@ const ativarDMZ = async (page) => {
 
   await page.click('td[id="apply_btn"]');
   ipcMain.emit("enviar-log", null, "Ativado DMZ");
+  escreverTxt("Ativado DMZ");
   return;
 };
 

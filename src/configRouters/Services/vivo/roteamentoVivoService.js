@@ -1,4 +1,5 @@
 const { ipcMain } = require("electron");
+const { escreverTxt } = require("../../utils/escreverTxt");
 
 /**
  * Tem a função de ativar as configurações de roteamento estatico
@@ -48,6 +49,7 @@ const roteamentoEstatico = async (page) => {
     null,
     "Ativado e configurado opções de Roteamento Estático"
   );
+  escreverTxt("Ativado e configurado opções de Roteamento Estático");
   return;
 };
 

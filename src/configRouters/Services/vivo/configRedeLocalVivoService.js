@@ -1,4 +1,5 @@
 const { ipcMain } = require("electron");
+const { escreverTxt } = require("../../utils/escreverTxt");
 
 /**
  * Tem a função de alterar as configurações de DHCP do roteador
@@ -24,6 +25,9 @@ const configRedeLocal = async (page) => {
   ipcMain.emit(
     "enviar-log",
     null,
+    "Alterado ip para 10.200.0.1, aguardando 60 seg para novo acesso..."
+  );
+  escreverTxt(
     "Alterado ip para 10.200.0.1, aguardando 60 seg para novo acesso..."
   );
   await page.waitForTimeout(65000); // Espera 60 seg para salvar as configurações
