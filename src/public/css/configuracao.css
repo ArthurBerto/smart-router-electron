@@ -15,8 +15,10 @@ body {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  width: 500px;
-  height: 400px;
+  width: 550px;
+  height: 450px;
+  display: flex;
+  flex-direction: column;
 }
 
 h2 {
@@ -27,6 +29,26 @@ h2 {
 #logs {
   margin-top: 15px;
   font-size: 12px;
+}
+
+.container-footer {
+  text-align: center;
+  margin-top: auto;
+}
+
+#btnVoltar {
+  background-color: #d9534f;
+  color: #ffffff;
+  border: none;
+  padding: 10px 15px;
+  width: 200px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#btnVoltar:hover {
+  background-color: #c9302c;
 }
 
 .hidden {

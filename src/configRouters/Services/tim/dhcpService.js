@@ -2,7 +2,7 @@ const { ipcMain } = require("electron");
 
 /**
  * Tem a função de alterar as configurações de DHCP do roteador
- * @param {*} page Aba do navegador que utliza a biblioteca Playwright
+ * @param {string} page Aba do navegador que utliza a biblioteca Playwright
  */
 
 const alterarDHCP = async (page) => {

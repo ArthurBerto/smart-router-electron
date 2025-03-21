@@ -3,6 +3,7 @@ const { ipcMain } = require("electron");
 /**
  * Tem a função de alterar as configurações de DDNS do roteador
  * @param {string} page Aba do navegador que utliza a biblioteca Playwright
+ * @param {string} loja Número da filial para configuração
  */
 
 const configDDNS = async (page, loja) => {

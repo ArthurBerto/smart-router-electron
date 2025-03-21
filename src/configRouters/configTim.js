@@ -1,19 +1,19 @@
 const { ipcMain } = require("electron");
 const { chromium } = require("playwright");
 
-const { fazerLogin } = require("./Services/loginService.js");
-const { alterarSSID } = require("./Services/ssidService.js");
-const { alterarConfigAPN } = require("./Services/configApnService.js");
-const { ativarDMZ } = require("./Services/ativarDmzService.js");
-const { configDDNS } = require("./Services/DdnsService.js");
-const { alterarDHCP } = require("./Services/dhcpService.js");
-const { estatistica } = require("./Services/estatisticaService.js");
-const { antena } = require("./Services/alterarAntenaService.js")
-const { alterarSenha } = require("./Services/alterarSenhaService.js")
-const { desabilitarHorarioVerao } = require("./Services/horarioVeraoService.js")
-const { agendamentoDiario } = require("./Services/reinicioDiarioService.js")
+const { fazerLogin } = require("./Services/tim/loginService.js");
+const { alterarSSID } = require("./Services/tim/ssidService.js");
+const { alterarConfigAPN } = require("./Services/tim/configApnService.js");
+const { ativarDMZ } = require("./Services/tim/ativarDmzService.js");
+const { configDDNS } = require("./Services/tim/ddnsService.js");
+const { alterarDHCP } = require("./Services/tim/dhcpService.js");
+const { estatistica } = require("./Services/tim/estatisticaService.js");
+const { antena } = require("./Services/tim/alterarAntenaService.js")
+const { alterarSenha } = require("./Services/tim/alterarSenhaService.js")
+const { desabilitarHorarioVerao } = require("./Services/tim/horarioVeraoService.js")
+const { agendamentoDiario } = require("./Services/tim/reinicioDiarioService.js")
 
-const scripTim = async (loja) => {
+const scriptTim = async (loja) => {
   // Inicializando as variáveis
   const roteadorIP = "http://192.168.1.1/normal";
   const usuario = "livetim";
@@ -68,4 +68,4 @@ const scripTim = async (loja) => {
   return
 };
 
-module.exports = { scripTim };
+module.exports = { scriptTim };

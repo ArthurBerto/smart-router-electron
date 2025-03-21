@@ -1,5 +1,6 @@
 const path = require("node:path"); // Corrigindo a importação do módulo `path`
-const { scripTim } = require("./src/configRouters/configTim.js"); // Importando as funções Playwright
+const { scriptTim } = require("./src/configRouters/configTim.js"); // Importando as funções Playwright
+const { scriptVivo } = require("./src/configRouters/configVivo.js");
 const { app, BrowserWindow, nativeTheme, ipcMain } = require("electron");
 
 let win;
@@ -43,9 +44,9 @@ app.whenReady().then(() => {
 
     try {
       if (modelo === "Vivo Box") {
-        await ConfigVivo(loja);
+        await scriptVivo(loja);
       } else if (modelo === "Tim Box") {
-        await scripTim(loja);
+        await scriptTim(loja);
       } else if (modelo === "Claro Box") {
         await ConfigClaro(loja);
       } else {
