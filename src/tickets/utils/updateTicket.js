@@ -2,12 +2,14 @@ const axios = require("axios");
 const CONFIG = require("../config");
 const logger = require("../logs/logger");
 
-async function updateTicket(ticket_id) {
+const { ipcMain } = require("electron");
+
+async function updateTicket(ticket_id, modelo, loja) {
     try {
         const ticketURL = `${CONFIG.API_URL}/${ticket_id}`;
 
         const updateData = {
-            "subject": "Teste infra #038",
+            "subject": `Configuração de ${modelo} para LJ${loja} `,
             "responder_id":31002213634,
             "status": 2,
             "custom_fields": {
@@ -36,6 +38,7 @@ async function updateTicket(ticket_id) {
         });
 
         if (response.status === 200) {
+            ipcMain.emit("enviar-log", null, `✅ Chamado atualizado! ID: ${ticket_id}`);
             logger.info(`✅ Chamado atualizado! ID: ${ticket_id}`);
         } else {
             logger.warn(`⚠️ Erro ao atualizar chamado: ${response.status}`);

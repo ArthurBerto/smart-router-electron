@@ -15,8 +15,10 @@ const { reiniciarConexao } = require("./Services/vivo/reinicioDiarioVivoService.
 const { antena } = require("./Services/vivo/antenaVivoService.js");
 const { planoDados } = require("./Services/vivo/planoDadosVivoService.js");
 const { escreverTxt } = require("./utils/escreverTxt.js");
+const { criarChamado } = require("../tickets/index.js");
 
-const scriptVivo = async (loja) => {
+
+const scriptVivo = async (modelo, loja) => {
   // Inicializando as variáveis
   const roteadorIP = "http://192.168.1.1";
   const usuario = "admin";
@@ -70,12 +72,15 @@ const scriptVivo = async (loja) => {
     await antena(page);
     await planoDados(page);
     await desativarDDNS(page);
+
+    // await criarChamado(modelo, loja);
   } catch (err) {
     ipcMain.emit("enviar-log", null, `ERRO: ${err}`);
   } finally {
     await navegador.close();
     ipcMain.emit("enviar-log", null, "FIM DA CONFIGURAÇÃO!");
     escreverTxt("FIM DA CONFIGURAÇÃO!")
+    await criarChamado(modelo, loja);
     return;
   }
 };

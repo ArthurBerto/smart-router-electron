@@ -1,21 +1,3 @@
-[21/03/2025, 12:44:02] Acessando o roteador
-[21/03/2025, 12:44:03] Interface web carregada!
-[21/03/2025, 12:44:03] Fazendo login...
-[21/03/2025, 12:44:08] Login efetuado com sucesso!
-[21/03/2025, 12:44:11] Senha alterada conforme o 'Key Pass'.
-[21/03/2025, 12:44:11] Fazendo login...
-[21/03/2025, 12:44:17] Login efetuado com sucesso!
-[21/03/2025, 12:44:41] SSID e Senha de acesso alterada!
-[21/03/2025, 12:45:10] Parâmetros de APN alterados
-[21/03/2025, 12:45:16] Alterado ip para 10.200.0.1, aguardando 60 seg para novo acesso...
-[21/03/2025, 12:46:21] Fazendo login...
-[21/03/2025, 12:46:26] Login efetuado com sucesso!
-[21/03/2025, 12:46:30] Ativado gerenciamento remoto da Web
-[21/03/2025, 12:46:47] Ativado e configurado opções de Roteamento Estático
-[21/03/2025, 12:46:50] Ativado DMZ
-[21/03/2025, 12:46:56] Configurações de DDNS ajustadas para lj361-4g.fortiddns.com!
-[21/03/2025, 12:47:11] Aplicado configurações para Reiniciar conexões
-[21/03/2025, 12:47:16] Ajustado para antena externa
-[21/03/2025, 12:47:21] Configurado plano de dados para 100GB
-[21/03/2025, 12:47:27] Desativado o DDNS
-[21/03/2025, 12:47:28] FIM DA CONFIGURAÇÃO!
+[21/03/2025, 13:30:30] Acessando o roteador
+[21/03/2025, 13:30:40] Fazendo login...
+[21/03/2025, 13:30:40] FIM DA CONFIGURAÇÃO!

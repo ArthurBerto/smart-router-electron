@@ -4,6 +4,8 @@ const path = require("path");
 const CONFIG = require("../config");
 const logger = require("../logs/logger");
 
+const { ipcMain } = require("electron");
+
 async function addNoteToTicket(ticket_id) {
     try {
         // ✅ Lendo o JSON gerado pelo convertTxtToJson.js
@@ -36,6 +38,7 @@ async function addNoteToTicket(ticket_id) {
         // 📌 Verificar resposta da API
         if (response.status === 201) {
             logger.info(`✅ Nota adicionada ao chamado ${ticket_id}`);
+            ipcMain.emit("enviar-log", null, `✅ Nota adicionada com sucesso no chamado ${ticket_id}`);
             console.log(`✅ Nota adicionada com sucesso no chamado ${ticket_id}`);
         } else {
             logger.warn(`⚠️ Erro ao adicionar nota ao chamado: ${response.status}`);

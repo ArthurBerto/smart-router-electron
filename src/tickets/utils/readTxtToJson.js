@@ -2,6 +2,8 @@ const fs = require("fs");
 const path = require("path");
 const logger = require("../logs/logger");
 
+const { ipcMain } = require("electron");
+
 function convertTxtToJson() {
     try {
         const arquivoTxt = path.join(__dirname, "../utils/dados/routerLog.txt"); 
