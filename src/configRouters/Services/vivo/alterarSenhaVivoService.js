@@ -9,8 +9,8 @@ const { escreverTxt } = require("../../utils/escreverTxt");
  */
 
 const alterarSenha = async (page, senhaAntiga, senhaNova) => {
-  await page.goto("http://192.168.1.1/systems_change_password.asp", {
-    waitUntil: "domcontentloaded",
+  await page.goto("http://10.200.0.1/systems_change_password.asp", {
+    waitUntil: "load",
   });
 
   const iframe = page.frameLocator("#main_frame");

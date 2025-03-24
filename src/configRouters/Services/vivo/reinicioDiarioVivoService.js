@@ -8,7 +8,7 @@ const { escreverTxt } = require("../../utils/escreverTxt");
 
 const reiniciarConexao = async (page) => {
   await page.goto("http://10.200.0.1/systems_connection_reset.asp", {
-    waitUntil: "domcontentloaded",
+    waitUntil: "load",
   });
 
   const iframe = page.frameLocator("#main_frame");

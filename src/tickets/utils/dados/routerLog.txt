@@ -1,3 +1,4 @@
-[21/03/2025, 13:30:30] Acessando o roteador
-[21/03/2025, 13:30:40] Fazendo login...
-[21/03/2025, 13:30:40] FIM DA CONFIGURAÇÃO!
+[24/03/2025, 12:15:09] INÍCIO DA CONFIGURAÇÃO
+p 192.168.1.1
+[24/03/2025, 12:15:10] Falha de acesso! Acessando o roteador pelo ip 10.200.0.1
+[24/03/2025, 12:15:10] FIM DA CONFIGURAÇÃO!

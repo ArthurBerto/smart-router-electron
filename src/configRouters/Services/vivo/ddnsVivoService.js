@@ -9,7 +9,7 @@ const { escreverTxt } = require("../../utils/escreverTxt");
 
 const configDDNS = async (page, loja) => {
   await page.goto("http://10.200.0.1/settings_ddns.asp", {
-    waitUntil: "domcontentloaded",
+    waitUntil: "load",
   });
   const iframe = page.frameLocator("#main_frame");
 

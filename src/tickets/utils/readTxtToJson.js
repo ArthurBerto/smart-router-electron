@@ -1,8 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-const logger = require("../logs/logger");
-
-const { ipcMain } = require("electron");
 
 function convertTxtToJson() {
     try {
@@ -10,8 +7,7 @@ function convertTxtToJson() {
 
         // 🔍 Verificando se o arquivo existe
         if (!fs.existsSync(arquivoTxt)) {
-            logger.error("❌ ERRO: Arquivo routerLog.txt não encontrado!");
-            console.error("❌ ERRO: Arquivo routerLog.txt não encontrado!");
+            console.log("ERRO: Arquivo routerLog.txt não encontrado!");
             return;
         }
 
@@ -31,12 +27,11 @@ function convertTxtToJson() {
         // 🌍 Converter para JSON e salvar
         fs.writeFileSync(jsonFilePath, JSON.stringify(jsonData, null, 4), "utf-8");
 
-        logger.info(`✅ Arquivo TXT convertido para JSON com sucesso: ${jsonFilePath}`);
-        console.log(`✅ Arquivo criado em: ${jsonFilePath}`);
+        console.log(`Arquivo TXT convertido para JSON com sucesso: ${jsonFilePath}`);
+        console.log(`Arquivo criado em: ${jsonFilePath}`);
 
     } catch (error) {
-        logger.error(`❌ ERRO ao converter TXT para JSON: ${error.message}`);
-        console.error(`❌ ERRO ao converter TXT para JSON: ${error.message}`);
+        console.log(`ERRO ao converter TXT para JSON: ${error}`);
     }
 }
 

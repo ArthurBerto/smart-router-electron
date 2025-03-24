@@ -9,7 +9,7 @@ const { escreverTxt } = require("../../utils/escreverTxt");
 
 const desativarDDNS = async (page) => {
   await page.goto("http://10.200.0.1/settings_ddns.asp", {
-    waitUntil: "domcontentloaded",
+    waitUntil: "load",
     timeout: 10000, // 10 segundos para garantir tempo suficiente
   });
   const iframe = page.frameLocator("#main_frame");

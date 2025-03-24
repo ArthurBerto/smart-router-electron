@@ -9,8 +9,8 @@ let win;
 const createWindow = () => {
   nativeTheme.themeSource = "system"; // Abre a cor da janela de acordo com o configurado pelo sistema
   win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 850,
+    height: 800,
     icon: "./src/public/img/icone.png",
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),

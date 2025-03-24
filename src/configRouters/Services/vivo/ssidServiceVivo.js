@@ -9,7 +9,7 @@ const { escreverTxt } = require("../../utils/escreverTxt");
 
 const alterarSSID = async (page, loja) => {
   await page.goto("http://192.168.1.1/wifi_basic.asp", {
-    waitUntil: "domcontentloaded",
+    waitUntil: "load",
   });
 
   const iframe = page.frameLocator("#main_frame");

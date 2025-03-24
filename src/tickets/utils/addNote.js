@@ -2,7 +2,6 @@ const axios = require("axios");
 const fs = require("fs");
 const path = require("path");
 const CONFIG = require("../config");
-const logger = require("../logs/logger");
 
 const { ipcMain } = require("electron");
 
@@ -13,8 +12,7 @@ async function addNoteToTicket(ticket_id) {
 
         // 🔄 Verificar se o arquivo JSON existe ANTES de tentar utilizá-lo
         if (!fs.existsSync(jsonFilePath)) {
-            logger.error("❌ ERRO: Arquivo note.json não encontrado!");
-            console.error("❌ ERRO: Arquivo note.json não encontrado!");
+            console.error("ERRO: Arquivo note.json não encontrado!");
             return;
         }
 
@@ -37,17 +35,15 @@ async function addNoteToTicket(ticket_id) {
 
         // 📌 Verificar resposta da API
         if (response.status === 201) {
-            logger.info(`✅ Nota adicionada ao chamado ${ticket_id}`);
-            ipcMain.emit("enviar-log", null, `✅ Nota adicionada com sucesso no chamado ${ticket_id}`);
-            console.log(`✅ Nota adicionada com sucesso no chamado ${ticket_id}`);
+            ipcMain.emit("enviar-log", null, `Nota adicionada com sucesso no chamado ${ticket_id}`);
+            console.log(`Nota adicionada com sucesso no chamado ${ticket_id}`);
         } else {
-            logger.warn(`⚠️ Erro ao adicionar nota ao chamado: ${response.status}`);
-            console.warn(`⚠️ Erro ao adicionar nota (${response.status}): ${response.data}`);
+            console.log(`Erro ao adicionar nota ao chamado: ${response.status}`);
+            console.log(`Erro ao adicionar nota (${response.status}): ${response.data}`);
         }
        
     } catch (error) {
-        logger.error(`❌ ERRO ao adicionar nota: ${error.message}`);
-        console.error(`❌ ERRO ao adicionar nota: ${error.message}`);
+        console.log(`ERRO ao adicionar nota: ${error.message}`);
     }
 }
 

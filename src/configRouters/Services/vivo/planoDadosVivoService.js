@@ -8,7 +8,7 @@ const { escreverTxt } = require("../../utils/escreverTxt");
 
 const planoDados = async (page) => {
   await page.goto("http://10.200.0.1/systems_data_plan.asp", {
-    waitUntil: "domcontentloaded",
+    waitUntil: "load",
   });
 
   const iframe = page.frameLocator("#main_frame");

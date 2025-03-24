@@ -8,7 +8,7 @@ const { escreverTxt } = require("../../utils/escreverTxt");
 
 const gerenciamentoPerfil = async (page) => {
   await page.goto("http://192.168.1.1/settings_profile_management.asp", {
-    waitUntil: "domcontentloaded",
+    waitUntil: "load",
   });
   const iframe = page.frameLocator("#main_frame");
 
