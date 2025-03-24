@@ -26,7 +26,7 @@ async function createTicket() {
 
         if (response.status === 201) {
             const ticket_id = response.data.ticket.id;
-            ipcMain.emit("enviar-log", null, `Chamado criado no Araujo Service! ID: ${ticket_id}`);
+            ipcMain.emit("enviar-log", null, `Chamado criado no Araujo Service! #SR-${ticket_id}`);
             return ticket_id;
         } else {
             console.log(`Erro inesperado ao criar chamado: ${response.status}`);

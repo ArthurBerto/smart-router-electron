@@ -6,30 +6,8 @@ const { escreverTxt } = require("../../utils/escreverTxt");
  * @param {string} page caminho do navegador para executar os métodos do playwright
  * @param {string} usuario usuário usado para realizar o login
  * @param {string} senha senha de acesso do usuário
+ * @param {string} senhaNova senha nova de acesso do usuário
  */
-
-/*const fazerLogin = async (page, usuario, senha) => {
-  try {
-    ipcMain.emit("enviar-log", null, "Fazendo login...");
-    escreverTxt("Fazendo login...");
-    await page.fill('input[name="user_name_plaintext"]', usuario); // Preenche o campo de usuário
-    await page.fill('input[name="user_passwd_plaintext"]', senha); // Preenche o campo de senha
-    await page.click('input[id="login_btn"]'); // Clica no botão de fazer login
-    await page.waitForTimeout(3000); // Aguarda 3 seg antes de prosseguir (tempo para a página carregar)
-
-    const mensagemErro = await page.locator("#login_msg").textContent();
-    console.log("Falha no login");
-
-
-
-  } catch (err) {
-    ipcMain.emit("enviar-log", null, "Login efetuado com sucesso!");
-    escreverTxt("Login efetuado com sucesso!");
-    return;
-  }
-};
-
-module.exports = { fazerLogin };*/
 
 const fazerLogin = async (page, usuario, senha, senhaNova) => {
   try {
@@ -47,7 +25,6 @@ const fazerLogin = async (page, usuario, senha, senhaNova) => {
       const mensagemErro = await page.locator("#login_msg").isVisible();
 
       if (mensagemErro) {
-        console.log(`Falha no login com a senha: ${senha}`);
         return false; // Retorna falso para indicar falha
       }
       
@@ -69,7 +46,6 @@ const fazerLogin = async (page, usuario, senha, senhaNova) => {
       escreverTxt("Login efetuado com sucesso!");
     } else {
       console.log("Todas as tentativas de login falharam!");
-      escreverTxt("Todas as tentativas de login falharam!");
     }
 
   } catch (err) {

@@ -80,15 +80,12 @@ const scriptVivo = async (modelo, loja) => {
 
 
     await fazerLogin(page, usuario, senha, novaSenha);
-    // await alterarSenha(page, senha, novaSenha); <------
 
-    //await fazerLogin(page, usuario, novaSenha); <------
     await alterarSSID(page, loja);
     await gerenciamentoPerfil(page);
     await configRedeLocal(page);
 
     await page.goto(novoIP, { waitUntil: "load" });
-    // await fazerLogin(page, usuario, novaSenha); <------
     await fazerLogin(page, usuario, senha, novaSenha);
     await configFirewall(page);
     await roteamentoEstatico(page);
@@ -99,16 +96,17 @@ const scriptVivo = async (modelo, loja) => {
     await planoDados(page);
     await desativarDDNS(page);
     await alterarSenha(page, senha, novaSenha);
+    await navegador.close();
+    
+    await operacaoTicket(modelo, loja);
 
-    // await criarChamado(modelo, loja);
   } catch (err) {
     console.log(err)
+    await navegador.close();
     ipcMain.emit("enviar-log", null, `ERRO: Reinicie o processo de configuração!`);
   } finally {
-    await navegador.close();
     ipcMain.emit("enviar-log", null, "FIM DA CONFIGURAÇÃO!");
     escreverTxt("FIM DA CONFIGURAÇÃO!");
-    // await operacaoTicket(modelo, loja);
     return;
   }
 };

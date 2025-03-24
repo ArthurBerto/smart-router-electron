@@ -35,7 +35,7 @@ async function addNoteToTicket(ticket_id) {
 
         // 📌 Verificar resposta da API
         if (response.status === 201) {
-            ipcMain.emit("enviar-log", null, `Nota adicionada com sucesso no chamado ${ticket_id}`);
+            ipcMain.emit("enviar-log", null, `Nota adicionada com sucesso no chamado #SR-${ticket_id}`);
             console.log(`Nota adicionada com sucesso no chamado ${ticket_id}`);
         } else {
             console.log(`Erro ao adicionar nota ao chamado: ${response.status}`);

@@ -10,7 +10,7 @@ async function updateTicket(ticket_id, modelo, loja) {
     const updateData = {
       subject: `Configuração de ${modelo} para LJ${loja} `,
       responder_id: 31002213634,
-      status: 2,
+      status: 2, // 2 - Aberto, 4 - Resolvido
       custom_fields: {
         categoria: "TI",
         formulrio: "Links / Internet",
@@ -40,20 +40,20 @@ async function updateTicket(ticket_id, modelo, loja) {
       ipcMain.emit(
         "enviar-log",
         null,
-        `Chamado atualizado no Araujo Service! ID: ${ticket_id}`
+        `Chamado fechado no Araujo Service! #SR-${ticket_id}`
       );
     } else {
       ipcMain.emit(
         "enviar-log",
         null,
-        `Erro ao atualizar chamado: ${response.status}`
+        `Erro ao fechar chamado: ${response.status}`
       );
     }
   } catch (error) {
     ipcMain.emit(
       "enviar-log",
       null,
-      `Erro ao atualizar o chamado: ${error}`
+      `Erro ao fechar o chamado: ${error}`
     );
   }
 }
