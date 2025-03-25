@@ -49,8 +49,6 @@ app.whenReady().then(() => {
         await scriptTim(loja);
       } else if (modelo === "Claro Box") {
         await ConfigClaro(loja);
-      } else {
-        throw new Error("Modelo de roteador inválido.");
       }
     } catch (err) {
       console.error("Erro ao configurar o roteador:", err);

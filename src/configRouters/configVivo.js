@@ -30,7 +30,7 @@ const scriptVivo = async (modelo, loja) => {
 
   // Abrindo o navegador chrome com o uso da biblioteca playwright
   const navegador = await chromium.launch({
-    headless: false,
+    headless: true,
     slowMo: 500,
   });
 
@@ -73,9 +73,13 @@ const scriptVivo = async (modelo, loja) => {
     await planoDados(page);
     await desativarDDNS(page);
     await alterarSenha(page, senha, novaSenha);
+
+    ipcMain.emit("enviar-log", null, "Fim do fluxo de configuração!");
+    escreverTxt("Fim do fluxo de configuração!");
+
     await navegador.close();
     
-    // await operacaoTicket(modelo, loja); <-----
+    await operacaoTicket(modelo, loja);
   } catch (err) {
     console.log(err)
     await navegador.close();

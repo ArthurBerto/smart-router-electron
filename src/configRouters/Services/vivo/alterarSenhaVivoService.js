@@ -20,7 +20,6 @@ const alterarSenha = async (page, senhaAntiga, senhaNova) => {
   await page.click('td[id="apply_btn"]');
   ipcMain.emit("enviar-log", null, "Senha alterada conforme o 'Key Pass'.");
   escreverTxt("Senha alterada conforme o 'Key Pass'.");
-  escreverTxt("Fim do fluxo de configuração!")
   return;
 };
 

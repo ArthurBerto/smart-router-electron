@@ -8,7 +8,8 @@ async function updateTicket(ticket_id, modelo, loja) {
     const ticketURL = `${CONFIG.API_URL}/${ticket_id}`;
 
     const updateData = {
-      subject: `Configuração de ${modelo} para LJ${loja} `,
+      //subject: `Configuração de ${modelo} para LJ${loja} `,
+      subject: `Teste de abertura de chamados via API`,
       responder_id: 31002213634,
       status: 2, // 2 - Aberto, 4 - Resolvido
       custom_fields: {
