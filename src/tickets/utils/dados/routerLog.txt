@@ -1,24 +1,22 @@
-[24/03/2025, 12:57:24] INÍCIO DA CONFIGURAÇÃO
-[24/03/2025, 12:57:24] Acessando o roteador pelo ip 192.168.1.1
-[24/03/2025, 12:57:35] Falha de acesso! Acessando o roteador pelo ip 10.200.0.1
-[24/03/2025, 12:57:36] Interface web carregada!
-[24/03/2025, 12:57:36] Fazendo login...
-[24/03/2025, 12:57:40] Login efetuado com sucesso!
-[24/03/2025, 12:57:43] Aguarde 90 segundos para o reset das configurações de fábrica
-[24/03/2025, 12:59:15] Fazendo login...
-[24/03/2025, 12:59:20] Login efetuado com sucesso!
-[24/03/2025, 12:59:44] SSID e Senha de acesso alterada!
-[24/03/2025, 13:00:35] Parâmetros de APN alterados
-[24/03/2025, 13:00:40] Alterado ip para 10.200.0.1, aguardando 60 seg para novo acesso...
-[24/03/2025, 13:01:46] Fazendo login...
-[24/03/2025, 13:01:51] Login efetuado com sucesso!
-[24/03/2025, 13:01:55] Ativado gerenciamento remoto da Web
-[24/03/2025, 13:02:12] Ativado e configurado opções de Roteamento Estático
-[24/03/2025, 13:02:16] Ativado DMZ
-[24/03/2025, 13:02:22] Configurações de DDNS ajustadas para lj361-4g.fortiddns.com!
-[24/03/2025, 13:02:37] Aplicado configurações para Reiniciar conexões
-[24/03/2025, 13:02:41] Ajustado para antena externa
-[24/03/2025, 13:02:48] Configurado plano de dados para 100GB
-[24/03/2025, 13:02:54] Desativado o DDNS
-[24/03/2025, 13:02:57] Senha alterada conforme o 'Key Pass'.
-[24/03/2025, 13:02:59] FIM DA CONFIGURAÇÃO!
+[25/03/2025, 11:12:44] Inciando processo de configuração
+[25/03/2025, 11:12:44] Tentando acessar o roteador pela url http://192.168.1.1/login.asp
+[25/03/2025, 11:12:55] Tentando acessar o roteador pela url http://10.200.0.1/login.asp
+[25/03/2025, 11:12:56] Interface web carregada
+[25/03/2025, 11:12:56] Fazendo login...
+[25/03/2025, 11:13:01] Tentando login novamente com a segunda senha...
+[25/03/2025, 11:13:05] Login efetuado com sucesso!
+[25/03/2025, 11:13:08] Aguarde 90 segundos para o reset das configurações de fábrica
+[25/03/2025, 11:14:38] Fazendo login...
+[25/03/2025, 11:14:44] Login efetuado com sucesso!
+[25/03/2025, 11:15:08] SSID e Senha de acesso alterada!
+[25/03/2025, 11:15:42] Parâmetros de APN alterados
+[25/03/2025, 11:15:48] Alterado ip para 10.200.0.1, aguardando 60 seg para novo acesso...
+[25/03/2025, 11:16:54] Fazendo login...
+[25/03/2025, 11:16:59] Login efetuado com sucesso!
+[25/03/2025, 11:17:02] Ativado gerenciamento remoto da Web
+[25/03/2025, 11:17:19] Ativado e configurado opções de Roteamento Estático
+[25/03/2025, 11:17:22] Ativado DMZ
+[25/03/2025, 11:17:29] Configurações de DDNS ajustadas para lj222-4g.fortiddns.com!
+[25/03/2025, 11:17:43] Aplicado configurações para Reiniciar conexões
+[25/03/2025, 11:17:47] Ajustado para antena externa
+[25/03/2025, 11:17:54] Configurado plano de dados para 100GB

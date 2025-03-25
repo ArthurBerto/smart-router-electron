@@ -17,6 +17,7 @@ const { planoDados } = require("./Services/vivo/planoDadosVivoService.js");
 const { escreverTxt } = require("./utils/escreverTxt.js");
 const { operacaoTicket } = require("../tickets/index.js");
 const { reset } = require("./Services/vivo/resetVivoService.js");
+const { acessarRoteador } = require("./Services/vivo/acessoRoteadorVivoService.js");
 
 
 const scriptVivo = async (modelo, loja) => {
@@ -36,48 +37,24 @@ const scriptVivo = async (modelo, loja) => {
   // Abrindo uma nova página no navegador
   const page = await navegador.newPage();
 
-  ipcMain.emit("enviar-log", null, "INÍCIO DA CONFIGURAÇÃO");
-  escreverTxt("INÍCIO DA CONFIGURAÇÃO")
+  ipcMain.emit("enviar-log", null, "Inciando processo de configuração");
+  escreverTxt("Inciando processo de configuração")
 
   try {
-    ipcMain.emit("enviar-log", null, "Acessando o roteador pelo ip 192.168.1.1");
-    escreverTxt("Acessando o roteador pelo ip 192.168.1.1")
 
-    try {
-      // Tenta logar no 192.168.1.1
-      await page.goto(roteadorIP, {
-        waitUntil: "load",
-        timeout: 10000,
-      });
-      ipcMain.emit("enviar-log", null, "Interface web carregada!");
-      escreverTxt("Interface web carregada!")
-    } catch (err) {
-      // Se não conseguir, tenta logar no 10.200.0.1
-      try {
-        ipcMain.emit("enviar-log", null, "Falha de acesso! Acessando o roteador pelo ip 10.200.0.1");
-        escreverTxt("Falha de acesso! Acessando o roteador pelo ip 10.200.0.1")
-        await page.goto(novoIP, {
-        waitUntil: "load",
-        timeout: 10000,
-        });
-        ipcMain.emit("enviar-log", null, "Interface web carregada!");
-        escreverTxt("Interface web carregada!")
+    let ipEscolhido = null;
 
-        await fazerLogin(page, usuario, senha, novaSenha);
-        await reset(page)
-
-        await page.goto(roteadorIP, {
-          waitUntil: "load",
-          timeout: 10000,
-        });
-
-      } catch (err) {
-        // Erro caso os dois ip's não conectem
-        ipcMain.emit("enviar-log", null, "ERRO: Verifique sua conexão com o roteador. Finalize o programa e tente novamente!");
-        return
-      }
+    if (await acessarRoteador(page, roteadorIP)) { // Tenta conectar no 192.168.1.1
+      ipEscolhido = roteadorIP;
+    } else if (await acessarRoteador(page, novoIP)) { // Se não der certo, conecata a 10.200.0.1
+      ipEscolhido = novoIP;
+      await fazerLogin(page, usuario, senha, novaSenha);
+      await reset(page)
+    } else { // Em caso de 2 erros, o programa finaliza
+      await navegador.close()
+      ipcMain.emit("enviar-log", null, "ERRO: Verifique sua conexão com o roteador. Tente novamente!");
+      return;
     }
-
 
     await fazerLogin(page, usuario, senha, novaSenha);
 
@@ -98,16 +75,11 @@ const scriptVivo = async (modelo, loja) => {
     await alterarSenha(page, senha, novaSenha);
     await navegador.close();
     
-    await operacaoTicket(modelo, loja);
-
+    // await operacaoTicket(modelo, loja); <-----
   } catch (err) {
     console.log(err)
     await navegador.close();
-    ipcMain.emit("enviar-log", null, `ERRO: Reinicie o processo de configuração!`);
-  } finally {
-    ipcMain.emit("enviar-log", null, "FIM DA CONFIGURAÇÃO!");
-    escreverTxt("FIM DA CONFIGURAÇÃO!");
-    return;
+    ipcMain.emit("enviar-log", null, `ERRO: Verifique sua conexão com o roteador. Tente novamente!`);
   }
 };
 

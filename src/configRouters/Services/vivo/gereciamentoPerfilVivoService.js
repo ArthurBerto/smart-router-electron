@@ -37,7 +37,7 @@ const gerenciamentoPerfil = async (page) => {
   await iframe.locator('input[id="pdn_profile_auth_pwd"]').type("vivo");
 
   await page.click('td[id="del_btn"]');
-  await page.waitForTimeout(20000);
+  await page.waitForTimeout(25000);
   ipcMain.emit("enviar-log", null, "Parâmetros de APN alterados");
   escreverTxt("Parâmetros de APN alterados");
   return;

@@ -24,6 +24,8 @@ const operacaoTicket = async (modelo, loja) => {
                 // Atualizar chamado (se necessário)
                 await updateTicket(ticket_id, modelo, loja);
 
+                ipcMain.emit("enviar-log", null, "Fim da configuração, roteador pronto para ser enviado!");
+
             }, 70000); // Aguarda 65 segundos antes de rodar as atualizações
         }
 

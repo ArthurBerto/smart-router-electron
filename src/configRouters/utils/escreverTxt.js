@@ -7,7 +7,7 @@ const escreverTxt = (mensagem) => {
     const dataHora = new Date().toLocaleString();
     const formato = `[${dataHora}] ${mensagem}`
 
-    if (mensagem === "INÍCIO DA CONFIGURAÇÃO") {
+    if (mensagem === "Inciando processo de configuração") {
         fs.appendFile(caminhoTxt, `${formato}\r\n`, { flag: 'w+' }, err => {})
         return
     }
