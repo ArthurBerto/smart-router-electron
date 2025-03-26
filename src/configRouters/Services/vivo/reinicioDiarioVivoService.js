@@ -1,5 +1,6 @@
 const { ipcMain } = require("electron");
 const { escreverTxt } = require("../../utils/escreverTxt");
+const refresh = require("../../utils/refreshPage");
 
 /**
  * Tem a função de alterar as configuraçõs de reinicio diário do navegador
@@ -7,9 +8,10 @@ const { escreverTxt } = require("../../utils/escreverTxt");
  */
 
 const reiniciarConexao = async (page) => {
-  await page.goto("http://10.200.0.1/systems_connection_reset.asp", {
-    waitUntil: "load",
-  });
+
+  const url = "http://10.200.0.1/systems_connection_reset.asp";
+
+  await refresh(page, url);
 
   const iframe = page.frameLocator("#main_frame");
 

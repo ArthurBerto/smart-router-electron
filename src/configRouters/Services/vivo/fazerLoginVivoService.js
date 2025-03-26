@@ -36,7 +36,6 @@ const fazerLogin = async (page, usuario, senha, senhaNova) => {
 
     // Se falhar, tenta com senha nova
     if (!loginSucesso) {
-      console.log("Tentando login novamente com a segunda senha...");
       escreverTxt("Tentando login novamente com a segunda senha...");
       loginSucesso = await tentarLogin(senhaNova);
     }
@@ -49,7 +48,7 @@ const fazerLogin = async (page, usuario, senha, senhaNova) => {
     }
 
   } catch (err) {
-    console.error("Erro no processo de login:", err);
+    console.log("Erro no processo de login:", err);
   }
 };
 

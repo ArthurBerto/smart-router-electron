@@ -1,5 +1,6 @@
 const { ipcMain } = require("electron");
 const { escreverTxt } = require("../../utils/escreverTxt");
+const refresh = require("../../utils/refreshPage");
 
 /**
  * Tem a função de resetar o roteador para as configurações de fábrica
@@ -7,9 +8,10 @@ const { escreverTxt } = require("../../utils/escreverTxt");
  */
 
 const reset = async (page) => {
-  await page.goto("http://10.200.0.1/systems_restore_settings.asp", {
-    waitUntil: "load",
-  });
+
+  const url = "http://10.200.0.1/systems_restore_settings.asp";
+
+  await refresh(page, url);
 
   const iframe = page.frameLocator("#main_frame");
 

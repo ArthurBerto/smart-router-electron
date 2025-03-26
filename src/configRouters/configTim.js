@@ -10,12 +10,8 @@ const { alterarDHCP } = require("./Services/tim/dhcpService.js");
 const { estatistica } = require("./Services/tim/estatisticaService.js");
 const { antena } = require("./Services/tim/alterarAntenaService.js");
 const { alterarSenha } = require("./Services/tim/alterarSenhaService.js");
-const {
-  desabilitarHorarioVerao,
-} = require("./Services/tim/horarioVeraoService.js");
-const {
-  agendamentoDiario,
-} = require("./Services/tim/reinicioDiarioService.js");
+const { desabilitarHorarioVerao } = require("./Services/tim/horarioVeraoService.js");
+const { agendamentoDiario } = require("./Services/tim/reinicioDiarioService.js");
 
 const scriptTim = async (loja) => {
   // Inicializando as variáveis

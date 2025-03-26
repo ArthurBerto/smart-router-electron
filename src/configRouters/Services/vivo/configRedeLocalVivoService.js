@@ -1,5 +1,6 @@
 const { ipcMain } = require("electron");
 const { escreverTxt } = require("../../utils/escreverTxt");
+const refresh = require("../../utils/refreshPage");
 
 /**
  * Tem a função de alterar as configurações de DHCP do roteador
@@ -7,9 +8,10 @@ const { escreverTxt } = require("../../utils/escreverTxt");
  */
 
 const configRedeLocal = async (page) => {
-  await page.goto("http://192.168.1.1/settings_lan_setup.asp", {
-    waitUntil: "load",
-  });
+
+  const url = "http://192.168.1.1/settings_lan_setup.asp";
+
+  await refresh(page, url);
 
   const iframe = page.frameLocator("#main_frame");
   await iframe.locator('input[id="DHCPSer_ipaddr_1"]').fill("10");

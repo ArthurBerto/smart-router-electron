@@ -1,5 +1,6 @@
 const { ipcMain } = require("electron");
 const { escreverTxt } = require("../../utils/escreverTxt");
+const refresh = require("../../utils/refreshPage");
 
 /**
  * Tem a função de ativar as configurações de DMZ do roteador
@@ -7,9 +8,11 @@ const { escreverTxt } = require("../../utils/escreverTxt");
  */
 
 const ativarDMZ = async (page) => {
-  await page.goto("http://10.200.0.1/settings_dmz.asp", {
-    waitUntil: "load",
-  });
+  
+  const url = "http://10.200.0.1/settings_dmz.asp";
+
+  await refresh(page, url);
+
   const iframe = page.frameLocator("#main_frame");
 
   await iframe.locator('input[id="sys_dmz"]').check();

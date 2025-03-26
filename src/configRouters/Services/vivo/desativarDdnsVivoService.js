@@ -1,5 +1,6 @@
 const { ipcMain } = require("electron");
 const { escreverTxt } = require("../../utils/escreverTxt");
+const refresh = require("../../utils/refreshPage");
 
 /**
  * Tem a função de desativar as configurações de DDNS do roteador
@@ -8,10 +9,11 @@ const { escreverTxt } = require("../../utils/escreverTxt");
  */
 
 const desativarDDNS = async (page) => {
-  await page.goto("http://10.200.0.1/settings_ddns.asp", {
-    waitUntil: "load",
-    timeout: 10000, // 10 segundos para garantir tempo suficiente
-  });
+
+  const url = "http://10.200.0.1/settings_ddns.asp";
+
+  await refresh(page, url);
+
   const iframe = page.frameLocator("#main_frame");
   await iframe.locator('input[id="DDNSEnable"]').uncheck();
   await page.click('td[id="apply_btn"]');

@@ -1,5 +1,6 @@
 const { ipcMain } = require("electron");
 const { escreverTxt } = require("../../utils/escreverTxt");
+const refresh = require("../../utils/refreshPage");
 
 /**
  * Tem a função de alterar o SSID do roteador e sua senha de acesso a rede WI-FI
@@ -8,9 +9,14 @@ const { escreverTxt } = require("../../utils/escreverTxt");
  */
 
 const alterarSSID = async (page, loja) => {
-  await page.goto("http://192.168.1.1/wifi_basic.asp", {
+
+  const url = "http://192.168.1.1/wifi_basic.asp";
+
+  await refresh(page, url);
+
+  /*await page.goto("http://192.168.1.1/wifi_basic.asp", {
     waitUntil: "load",
-  });
+  });*/
 
   const iframe = page.frameLocator("#main_frame");
   await iframe

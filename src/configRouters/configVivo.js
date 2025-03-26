@@ -1,7 +1,7 @@
 const { ipcMain } = require("electron");
 const { chromium } = require("playwright");
 
-const { fazerLogin } = require("./Services/vivo/loginVivoService.js");
+const { fazerLogin } = require("./Services/vivo/fazerLoginVivoService.js");
 const { alterarSenha } = require("./Services/vivo/alterarSenhaVivoService.js");
 const { alterarSSID } = require("./Services/vivo/ssidServiceVivo.js");
 const { gerenciamentoPerfil } = require("./Services/vivo/gereciamentoPerfilVivoService.js");

@@ -1,5 +1,6 @@
 const { ipcMain } = require("electron");
 const { escreverTxt } = require("../../utils/escreverTxt");
+const refresh = require("../../utils/refreshPage");
 
 /**
  * Tem a função de ativar as configurações de gerenciamento remoto
@@ -7,9 +8,11 @@ const { escreverTxt } = require("../../utils/escreverTxt");
  */
 
 const configFirewall = async (page) => {
-  await page.goto("http://10.200.0.1/settings_firewall.asp", {
-    waitUntil: "load",
-  });
+
+  const url = "http://10.200.0.1/settings_firewall.asp";
+
+  await refresh(page, url);
+
   const iframe = page.frameLocator("#main_frame");
 
   await iframe.locator('input[id="checkbox2"]').check();

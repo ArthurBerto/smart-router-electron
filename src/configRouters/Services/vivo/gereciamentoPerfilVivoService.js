@@ -1,5 +1,6 @@
 const { ipcMain } = require("electron");
 const { escreverTxt } = require("../../utils/escreverTxt");
+const refresh = require("../../utils/refreshPage");
 
 /**
  * Tem a função de alterar as configurações de APN do roteador
@@ -7,9 +8,11 @@ const { escreverTxt } = require("../../utils/escreverTxt");
  */
 
 const gerenciamentoPerfil = async (page) => {
-  await page.goto("http://192.168.1.1/settings_profile_management.asp", {
-    waitUntil: "load",
-  });
+
+  const url = "http://192.168.1.1/settings_profile_management.asp"
+
+  await refresh(page, url);
+
   const iframe = page.frameLocator("#main_frame");
 
   await page.click('td[id="add_btn"]'); // Cria um novo perfil
