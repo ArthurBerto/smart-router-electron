@@ -1,4 +1,6 @@
 const { ipcMain } = require("electron");
+const { escreverTxt } = require("../../utils/escreverTxt");
+const refresh = require("../../utils/refreshPage");
 
 /**
  * Tem a função de alterar para antena externa do roteador
@@ -6,13 +8,15 @@ const { ipcMain } = require("electron");
  */
 
 const antena = async (page) => {
-  await page.goto("http://10.200.0.1/settings/antenna.html", {
-    waitUntil: "domcontentloaded",
-  });
+
+  const url = "http://10.200.0.1/settings/antenna.html"
+
+  await refresh(page, url);
 
   await page.locator('input[id="antType_ex"]').check(); // Marca a checkbox para a antena externa
   await page.click('input[value="Salvar"]'); // Salva as configurações
   ipcMain.emit("enviar-log", null, "Ajustado para antena externa");
+  escreverTxt("Ajustado para antena externa");
   return
 };
 

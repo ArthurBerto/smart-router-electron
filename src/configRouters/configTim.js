@@ -12,8 +12,12 @@ const { antena } = require("./Services/tim/alterarAntenaService.js");
 const { alterarSenha } = require("./Services/tim/alterarSenhaService.js");
 const { desabilitarHorarioVerao } = require("./Services/tim/horarioVeraoService.js");
 const { agendamentoDiario } = require("./Services/tim/reinicioDiarioService.js");
+const { escreverTxt } = require("./utils/escreverTxt.js");
+const { operacaoTicket } = require("../tickets/index.js");
+const { reset } = require("./Services/tim/resetTimService.js");
+const { acessarRoteador } = require("./utils/acessoRoteador.js");
 
-const scriptTim = async (loja) => {
+const scriptTim = async (modelo, loja) => {
   // Inicializando as variáveis
   const roteadorIP = "http://192.168.1.1/normal";
   const usuario = "livetim";
@@ -23,53 +27,61 @@ const scriptTim = async (loja) => {
 
   // Abrindo o navegador chrome com o uso da biblioteca playwright
   const navegador = await chromium.launch({
-    headless: false,
+    headless: true,
     slowMo: 500,
   });
 
   // Abrindo uma nova página no navegador
   const page = await navegador.newPage();
 
+  ipcMain.emit("enviar-log", null, "Inciando processo de configuração");
+  escreverTxt("Inciando processo de configuração")
+
   try {
-    ipcMain.emit("enviar-log", null, "Acessando o roteador");
-    try {
-      await page.goto(roteadorIP, {
-        waitUntil: "domcontentloaded",
-        timeout: 10000,
-      });
-      ipcMain.emit("enviar-log", null, "Interface gráfica carregada!");
-    } catch (err) {
-      ipcMain.emit(
-        "enviar-log",
-        null,
-        `ERRO: Não foi possível carregar '${roteadorIP}', verifique se a Tim Box está com as configurações de fábrica ou com o cabo de rede conectado.`
-      );
-      await navegador.close();
+    
+    let ipEscolhido = null;
+
+    if (await acessarRoteador(page, roteadorIP)) { // Tenta conectar no 192.168.1.1
+      ipEscolhido = roteadorIP;
+    } else if (await acessarRoteador(page, novoIP)) { // Se não der certo, conecata a 10.200.0.1
+      ipEscolhido = novoIP;
+      await fazerLogin(page, usuario, senha, novaSenha);
+      await reset(page);
+    } else { // Em caso de 2 erros, o programa finaliza
+      await navegador.close()
+      ipcMain.emit("enviar-log", null, "ERRO: Verifique sua conexão com o roteador. Tente novamente!");
+      return;
     }
 
-    await fazerLogin(page, usuario, senha); // Função que realiza o login
+    await page.goto(roteadorIP, { waitUntil: "load" }); // Entra no novo IP configurado no DHCP
+    await fazerLogin(page, usuario, senha, novaSenha); // Função que realiza o login
     await alterarSSID(page, loja); // Função que altera o SSID e senha de acesso
     await alterarConfigAPN(page); // Função que altera as configs de APN
     await ativarDMZ(page); // Função que ativa as configurações de DMZ
     await configDDNS(page, loja); // Função que altera as configurações de DDNS
     await alterarDHCP(page); // Função que altera as configurações de DHCP
 
-    await page.goto(novoIP, { waitUntil: "domcontentloaded" }); // Entra no novo IP configurado no DHCP
-    await fazerLogin(page, usuario, senha); // Realiza um novo login
+    await page.goto(novoIP, { waitUntil: "load" }); // Entra no novo IP configurado no DHCP
+    await fazerLogin(page, usuario, senha, novaSenha); // Realiza um novo login
     await estatistica(page); // Função que altera os planos de dados
     await antena(page); // Função que altera para antena externa
     await alterarSenha(page, senha, novaSenha); // Função para alterar a senha
 
-    await page.goto(novoIP, { waitUntil: "domcontentloaded" }); // Entra no novo IP configurado no DHCP
-    await fazerLogin(page, usuario, novaSenha); // Realiza um novo login
+    await page.goto(novoIP, { waitUntil: "load" }); // Entra no novo IP configurado no DHCP
+    await fazerLogin(page, usuario, senha, novaSenha); // Realiza um novo login
     await desabilitarHorarioVerao(page); // Desabilita a opção de horário de verão
     await agendamentoDiario(page); // Aplica as configurações para reiniciar conexões
-  } catch (err) {
-    ipcMain.emit("enviar-log", null, `ERRO: ${err}`);
-  } finally {
+  
+    ipcMain.emit("enviar-log", null, "Fim do fluxo de configuração!");
+    escreverTxt("Fim do fluxo de configuração!");
+    
     await navegador.close();
-    ipcMain.emit("enviar-log", null, "FIM DA CONFIGURAÇÃO!");
-    return;
+
+    // await operacaoTicket(modelo, loja);
+  } catch (err) {
+    console.log(err)
+    await navegador.close();
+    ipcMain.emit("enviar-log", null, `ERRO: Verifique sua conexão com o roteador. Tente novamente!`);
   }
 };
 

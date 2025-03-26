@@ -46,7 +46,7 @@ app.whenReady().then(() => {
       if (modelo === "Vivo Box") {
         await scriptVivo(modelo, loja);
       } else if (modelo === "Tim Box") {
-        await scriptTim(loja);
+        await scriptTim(modelo, loja);
       } else if (modelo === "Claro Box") {
         await ConfigClaro(loja);
       }

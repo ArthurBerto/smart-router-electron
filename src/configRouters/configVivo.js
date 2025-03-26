@@ -17,7 +17,7 @@ const { planoDados } = require("./Services/vivo/planoDadosVivoService.js");
 const { escreverTxt } = require("./utils/escreverTxt.js");
 const { operacaoTicket } = require("../tickets/index.js");
 const { reset } = require("./Services/vivo/resetVivoService.js");
-const { acessarRoteador } = require("./Services/vivo/acessoRoteadorVivoService.js");
+const { acessarRoteador } = require("./utils/acessoRoteador.js");
 
 
 const scriptVivo = async (modelo, loja) => {

@@ -1,5 +1,5 @@
 const { ipcMain } = require("electron");
-const { escreverTxt } = require("../../utils/escreverTxt");
+const { escreverTxt } = require("./escreverTxt");
 
 /**
  * Tem a função de acessar o roteador no ip de configuração

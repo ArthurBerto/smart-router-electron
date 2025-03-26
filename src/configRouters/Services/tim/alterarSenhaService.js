@@ -1,4 +1,6 @@
 const { ipcMain } = require("electron");
+const refresh = require("../../utils/refreshPage");
+const { escreverTxt } = require("../../utils/escreverTxt");
 
 /**
  * Tem a função de alterar a senha do roteador
@@ -8,9 +10,10 @@ const { ipcMain } = require("electron");
  */
 
 const alterarSenha = async (page, senhaAntiga, senhaNova) => {
-  await page.goto("http://10.200.0.1/system/modifyPassword.html", {
-    waitUntil: "domcontentloaded",
-  });
+
+  const url = "http://10.200.0.1/system/modifyPassword.html";
+
+  await refresh(page, url);
 
   await page.fill(
     'input[id="system_modify_password_old_password"]',
@@ -24,6 +27,7 @@ const alterarSenha = async (page, senhaAntiga, senhaNova) => {
 
   await page.click('input[id="system_modify_password_submit"]'); // Salva a configuração
   ipcMain.emit("enviar-log", null, "Senha alterada conforme o 'Key Pass'.");
+  escreverTxt("Senha alterada conforme o 'Key Pass'.")
   await page.waitForTimeout(2000); // Aguarda 2 seg para não prejudicar as configurações
   return
 };

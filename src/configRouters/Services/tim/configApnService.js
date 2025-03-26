@@ -1,4 +1,6 @@
 const { ipcMain } = require("electron");
+const refresh = require("../../utils/refreshPage");
+const { escreverTxt } = require("../../utils/escreverTxt");
 
 /**
  * Tem a função de alterar as configurações de APN do roteador
@@ -6,9 +8,10 @@ const { ipcMain } = require("electron");
  */
 
 const alterarConfigAPN = async (page) => {
-  await page.goto("http://192.168.1.1/settings/dialup_apn.html", {
-    waitUntil: "domcontentloaded",
-  });
+
+  const url = "http://192.168.1.1/settings/dialup_apn.html"
+
+  await refresh(page, url)
 
   await page.click('input[value="Novo perfil"]'); // Cria um novo perfil
   await page.locator('input[id="profile_name_dialog"]').type(`TIM2`);
@@ -21,6 +24,7 @@ const alterarConfigAPN = async (page) => {
   await page.click('input[id="dailup_submit"]'); // Salva novamente
   await page.waitForTimeout(2000); // Aguarda 2 seg para salvar as configurações
   ipcMain.emit("enviar-log", null, "Parâmetros de APN alterados");
+  escreverTxt("Parâmetros de APN alterados");
   return
 };
 
