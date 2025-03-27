@@ -81,7 +81,7 @@ const scriptTim = async (modelo, loja, operador) => {
     
     await navegador.close();
 
-    // await operacaoTicket(modelo, loja, operador);
+    await operacaoTicket(modelo, loja, operador);
   } catch (err) {
     console.log(err)
     await navegador.close();
