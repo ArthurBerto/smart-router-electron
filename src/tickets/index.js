@@ -5,10 +5,10 @@ const convertTxtToJson = require("./utils/readTxtToJson");
 
 const { ipcMain } = require("electron");
 
-const operacaoTicket = async (modelo, loja) => {
+const operacaoTicket = async (modelo, loja, operador) => {
     try {
         // Criar chamado
-        const ticket_id = await createTicket();
+        const ticket_id = await createTicket(operador);
         
         if (ticket_id) {
 
@@ -22,7 +22,7 @@ const operacaoTicket = async (modelo, loja) => {
                 await addNoteToTicket(ticket_id);
 
                 // Atualizar chamado (se necessário)
-                await updateTicket(ticket_id, modelo, loja);
+                await updateTicket(ticket_id, modelo, loja, operador);
 
                 ipcMain.emit("enviar-log", null, "Fim da configuração, roteador pronto para ser enviado!");
 

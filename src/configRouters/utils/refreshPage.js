@@ -1,6 +1,14 @@
 const { ipcMain } = require("electron");
 const { escreverTxt } = require("./escreverTxt");
 
+/**
+ * Função que tem a finalidade de recarregar a página em caso de timeout
+ * @param {string} page Aba do navegador que utliza a biblioteca Playwright
+ * @param {string} url Url que será acessada
+ * @param {number} tentativaMax Número de tentativas de recarregamento, o padrão é 3.
+ * @returns 
+ */
+
 const refresh = async (page, url, tentativaMax = 3) => {
   for (let tentativa = 1; tentativa <= tentativaMax; tentativa++) {
     try {

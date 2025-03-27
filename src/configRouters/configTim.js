@@ -16,8 +16,9 @@ const { escreverTxt } = require("./utils/escreverTxt.js");
 const { operacaoTicket } = require("../tickets/index.js");
 const { reset } = require("./Services/tim/resetTimService.js");
 const { acessarRoteador } = require("./utils/acessoRoteador.js");
+const refresh = require("./utils/refreshPage.js");
 
-const scriptTim = async (modelo, loja) => {
+const scriptTim = async (modelo, loja, operador) => {
   // Inicializando as variáveis
   const roteadorIP = "http://192.168.1.1/normal";
   const usuario = "livetim";
@@ -53,7 +54,8 @@ const scriptTim = async (modelo, loja) => {
       return;
     }
 
-    await page.goto(roteadorIP, { waitUntil: "load" }); // Entra no novo IP configurado no DHCP
+    await refresh(page, roteadorIP);
+    //await page.goto(roteadorIP, { waitUntil: "load" }); // Entra no novo IP configurado no DHCP
     await fazerLogin(page, usuario, senha, novaSenha); // Função que realiza o login
     await alterarSSID(page, loja); // Função que altera o SSID e senha de acesso
     await alterarConfigAPN(page); // Função que altera as configs de APN
@@ -61,13 +63,15 @@ const scriptTim = async (modelo, loja) => {
     await configDDNS(page, loja); // Função que altera as configurações de DDNS
     await alterarDHCP(page); // Função que altera as configurações de DHCP
 
-    await page.goto(novoIP, { waitUntil: "load" }); // Entra no novo IP configurado no DHCP
+    await refresh(page, novoIP);
+    //await page.goto(novoIP, { waitUntil: "load" }); // Entra no novo IP configurado no DHCP
     await fazerLogin(page, usuario, senha, novaSenha); // Realiza um novo login
     await estatistica(page); // Função que altera os planos de dados
     await antena(page); // Função que altera para antena externa
     await alterarSenha(page, senha, novaSenha); // Função para alterar a senha
 
-    await page.goto(novoIP, { waitUntil: "load" }); // Entra no novo IP configurado no DHCP
+    await refresh(page, novoIP);
+    //await page.goto(novoIP, { waitUntil: "load" }); // Entra no novo IP configurado no DHCP
     await fazerLogin(page, usuario, senha, novaSenha); // Realiza um novo login
     await desabilitarHorarioVerao(page); // Desabilita a opção de horário de verão
     await agendamentoDiario(page); // Aplica as configurações para reiniciar conexões
@@ -77,7 +81,7 @@ const scriptTim = async (modelo, loja) => {
     
     await navegador.close();
 
-    // await operacaoTicket(modelo, loja);
+    // await operacaoTicket(modelo, loja, operador);
   } catch (err) {
     console.log(err)
     await navegador.close();

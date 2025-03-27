@@ -3,14 +3,24 @@ const CONFIG = require("../config");
 
 const { ipcMain } = require("electron");
 
-async function updateTicket(ticket_id, modelo, loja) {
+async function updateTicket(ticket_id, modelo, loja, operador) {
+  let responserId;
+
+  if (operador === "Arthur") {
+    responserId = 31001962492;
+  } else if (operador === "William") {
+    responserId = 31002213634;
+  } else {
+    throw new Error("Operador não reconhecido");
+  }
+
   try {
     const ticketURL = `${CONFIG.API_URL}/${ticket_id}`;
 
     const updateData = {
       subject: `Configuração de ${modelo} para LJ${loja} `,
-      responder_id: 31002213634,
-      status: 2, // 2 - Aberto, 4 - Resolvido
+      responder_id: responserId,
+      status: 4, // 2 - Aberto, 4 - Resolvido
       custom_fields: {
         categoria: "TI",
         formulrio: "Links / Internet",
@@ -50,11 +60,7 @@ async function updateTicket(ticket_id, modelo, loja) {
       );
     }
   } catch (error) {
-    ipcMain.emit(
-      "enviar-log",
-      null,
-      `Erro ao fechar o chamado: ${error}`
-    );
+    ipcMain.emit("enviar-log", null, `Erro ao fechar o chamado: ${error}`);
   }
 }
 

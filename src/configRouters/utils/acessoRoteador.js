@@ -15,7 +15,7 @@ const acessarRoteador = async (page, ip) => {
       `Tentando acessar o roteador pela url ${ip}`
     );
     escreverTxt(`Tentando acessar o roteador pela url ${ip}`);
-
+    await page.waitForTimeout(2000);
     await page.goto(ip, {
       waitUntil: "load",
       timeout: 10000,

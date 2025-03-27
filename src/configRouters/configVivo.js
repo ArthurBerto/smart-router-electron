@@ -20,7 +20,7 @@ const { reset } = require("./Services/vivo/resetVivoService.js");
 const { acessarRoteador } = require("./utils/acessoRoteador.js");
 
 
-const scriptVivo = async (modelo, loja) => {
+const scriptVivo = async (modelo, loja, operador) => {
   // Inicializando as variáveis
   const roteadorIP = "http://192.168.1.1/login.asp";
   const usuario = "admin";
@@ -62,7 +62,8 @@ const scriptVivo = async (modelo, loja) => {
     await gerenciamentoPerfil(page);
     await configRedeLocal(page);
 
-    await page.goto(novoIP, { waitUntil: "load" });
+    await refresh(page, novoIP);
+    // await page.goto(novoIP, { waitUntil: "load" });
     await fazerLogin(page, usuario, senha, novaSenha);
     await configFirewall(page);
     await roteamentoEstatico(page);
@@ -79,7 +80,7 @@ const scriptVivo = async (modelo, loja) => {
 
     await navegador.close();
     
-    await operacaoTicket(modelo, loja);
+    await operacaoTicket(modelo, loja, operador);
   } catch (err) {
     console.log(err)
     await navegador.close();

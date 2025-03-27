@@ -12,9 +12,9 @@
     "icon": "assets/icone.png"
   },
   "keywords": [],
-  "author": "",
+  "author": "Arthur Berto",
   "license": "ISC",
-  "description": "",
+  "description": "Configurador automático de roteadores 4g",
   "devDependencies": {
     "@electron-forge/cli": "^7.8.0",
     "@electron-forge/maker-deb": "^7.8.0",

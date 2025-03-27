@@ -36,7 +36,7 @@ app.whenReady().then(() => {
   })
 
   // Manipula a configuração do roteador via IPC
-  ipcMain.on("configurar-roteador", async (e, { modelo, loja }) => {
+  ipcMain.on("configurar-roteador", async (e, { modelo, loja, operador }) => {
 
     if (win) {
       win.loadFile("./src/views/configuracao.html")
@@ -44,9 +44,9 @@ app.whenReady().then(() => {
 
     try {
       if (modelo === "Vivo Box") {
-        await scriptVivo(modelo, loja);
+        await scriptVivo(modelo, loja, operador);
       } else if (modelo === "Tim Box") {
-        await scriptTim(modelo, loja);
+        await scriptTim(modelo, loja, operador);
       } else if (modelo === "Claro Box") {
         await ConfigClaro(loja);
       }

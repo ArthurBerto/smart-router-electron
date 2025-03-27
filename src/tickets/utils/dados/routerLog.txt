@@ -1,27 +1,27 @@
-[26/03/2025, 11:59:59] Inciando processo de configuração
-[26/03/2025, 11:59:59] Tentando acessar o roteador pela url http://192.168.1.1/normal
-[26/03/2025, 12:00:10] Tentando acessar o roteador pela url http://10.200.0.1/normal
-[26/03/2025, 12:00:11] Interface web carregada
-[26/03/2025, 12:00:11] Fazendo login...
-[26/03/2025, 12:00:16] Tentando login novamente com a segunda senha...
-[26/03/2025, 12:00:22] Login efetuado com sucesso!
-[26/03/2025, 12:00:24] Aguarde 60 segundos para o reset das configurações de fábrica
-[26/03/2025, 12:01:25] Fazendo login...
-[26/03/2025, 12:01:31] Login efetuado com sucesso!
-[26/03/2025, 12:01:33] Aguarde 15 seg para sincronizar os dados...
-[26/03/2025, 12:01:51] SSID e Senha de acesso alterada!
-[26/03/2025, 12:02:01] Parâmetros de APN alterados
-[26/03/2025, 12:02:06] Ativado DMZ
-[26/03/2025, 12:02:12] Configurações de DDNS ajustadas para lj555-4g.fortiddns.com!
-[26/03/2025, 12:02:15] Alterado ip para 10.200.0.1, aguardando 10 seg para novo acesso...
-[26/03/2025, 12:02:26] Fazendo login...
-[26/03/2025, 12:02:33] Login efetuado com sucesso!
-[26/03/2025, 12:02:35] Configurado plano de dados para 100GB
-[26/03/2025, 12:02:37] Ajustado para antena externa
-[26/03/2025, 12:02:40] Senha alterada conforme o 'Key Pass'.
-[26/03/2025, 12:02:43] Fazendo login...
-[26/03/2025, 12:02:48] Tentando login novamente com a segunda senha...
-[26/03/2025, 12:02:54] Login efetuado com sucesso!
-[26/03/2025, 12:03:02] Desabilitado horário de verão
-[26/03/2025, 12:03:10] Aplicado configurações para Reiniciar conexões
-[26/03/2025, 12:03:12] Fim do fluxo de configuração!
+[27/03/2025, 10:42:40] Inciando processo de configuração
+[27/03/2025, 10:42:40] Tentando acessar o roteador pela url http://192.168.1.1/normal
+[27/03/2025, 10:42:52] Tentando acessar o roteador pela url http://10.200.0.1/normal
+[27/03/2025, 10:42:55] Interface web carregada
+[27/03/2025, 10:42:55] Fazendo login...
+[27/03/2025, 10:43:00] Tentando login novamente com a segunda senha...
+[27/03/2025, 10:43:06] Login efetuado com sucesso!
+[27/03/2025, 10:43:08] Aguarde 60 segundos para o reset das configurações de fábrica
+[27/03/2025, 10:44:10] Fazendo login...
+[27/03/2025, 10:44:16] Login efetuado com sucesso!
+[27/03/2025, 10:44:19] Aguarde 15 seg para sincronizar os dados...
+[27/03/2025, 10:44:36] SSID e Senha de acesso alterada!
+[27/03/2025, 10:44:46] Parâmetros de APN alterados
+[27/03/2025, 10:44:49] Ativado DMZ
+[27/03/2025, 10:44:56] Configurações de DDNS ajustadas para lj001-4g.fortiddns.com!
+[27/03/2025, 10:44:59] Alterado ip para 10.200.0.1, aguardando 10 seg para novo acesso...
+[27/03/2025, 10:45:10] Fazendo login...
+[27/03/2025, 10:45:17] Login efetuado com sucesso!
+[27/03/2025, 10:45:19] Configurado plano de dados para 100GB
+[27/03/2025, 10:45:21] Ajustado para antena externa
+[27/03/2025, 10:45:24] Senha alterada conforme o 'Key Pass'.
+[27/03/2025, 10:45:27] Fazendo login...
+[27/03/2025, 10:45:33] Tentando login novamente com a segunda senha...
+[27/03/2025, 10:45:38] Login efetuado com sucesso!
+[27/03/2025, 10:45:46] Desabilitado horário de verão
+[27/03/2025, 10:45:54] Aplicado configurações para Reiniciar conexões
+[27/03/2025, 10:45:56] Fim do fluxo de configuração!
